@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week6</title>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Enter Contact</a>
+        <a href="contactList.html">View Contacts</a>
+    </nav>
+    <form action="/updateContact" method="post">
+        <span id="err" style="color: red;"></span>
+        <br>
+        <label for="name">Enter your Name!</label>
+        <br>
+        <input type="text" name="name" id="nameEntry">
+        <br>
+        <label for="number">Enter your Number!</label>
+        <br>
+        <input type="number" name="number" id="numberEntry">
+        <br>
+        <label for="phoneType">Enter your Phone Type!</label>
+        <br>
+        <select id="phoneType" name="phoneType">
+            <option value="Mobile">Mobile</option>
+            <option value="Home">Home</option>
+            <option value="Work">Work</option>
+        </select>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

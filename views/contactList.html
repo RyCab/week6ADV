@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Contacts</title>
+</head>
+<body>
+    <div id="container">
+
+        <h1>Here is your list of Contacts!</h1>
+        <nav>
+            <a href="index.html">Enter Contact</a>
+            <a href="#">View Contacts</a>
+        </nav>
+        <script>
+            fetch('/getData').then((contacts)=>{
+                contacts.json().then((theContacts)=>{
+                    for(let contact of theContacts.contact){
+                       // console.log(theContacts)
+                        let element = document.createElement('p')
+                        element.innerHTML = contact.name
+                         + " " +contact.number
+                          + " " +contact.phoneType
+                        document.getElementById('container').append(element)
+                        //add delete button
+                        let deleteButton = document.createElement('button')
+                        deleteButton.innerText = 'Delete Entry'
+                        deleteButton.addEventListener('click', function deleteContact(){
+                            location.reload()
+                            fetch('/deleteContact', {
+                                method:"POST",
+                                headers:{
+                                    'Content-type': 'application/json'
+                                },
+                                body:JSON.stringify({
+                                    _id:contact._id,
+                                    contact:contact.contact
+                                })
+                            })
+                        })
+                        element.appendChild(deleteButton)
+
+                        let editButton = document.createElement('button')
+                        editButton.innerText = 'Edit Entry'
+                        editButton.addEventListener('click', function editContact(){
+                            window.location.href = `/updatePage/${contact._id}`
+                            console.log(contact._id)
+                            /*location.reload()
+                            fetch('/updateContact', {
+                                method:"GET",
+                                headers:{
+                                    'Content-type': 'application/json'
+                                },
+                                body:JSON.stringify({
+                                    _id:contact._id,
+                                    contact:contact.contact
+                                })
+                            })*/
+                        })
+                        element.appendChild(editButton)
+                    }
+                })
+            })
+        </script>
+                
+    </div>
+</body>
+</html>
